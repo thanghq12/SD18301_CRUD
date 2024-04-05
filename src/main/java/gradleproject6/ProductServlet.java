@@ -125,6 +125,18 @@ public class ProductServlet extends HttpServlet {
             productDao.addProduct(product);
             response.sendRedirect("/gradleproject6/product/list");
             }
+        } else if(uri.contains("edit")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String name = request.getParameter("name");
+            String price = request.getParameter("price");
+             
+            Product product = new Product();
+            product.setId(id);
+            product.setName(name);
+            product.setPrice(Double.parseDouble(price));
+            productDao.updateProduct(product);
+            response.sendRedirect("/gradleproject6/product/list");
+             
         }
     }
 
