@@ -22,7 +22,7 @@ import util.HibernateUtil;
  *
  * @author hoangquangthang
  */
-@WebServlet(name="ProductServlet",urlPatterns = {"/product/list","/product/add"})
+@WebServlet(name="ProductServlet",urlPatterns = {"/product/list","/product/add","/product/edit"})
 public class ProductServlet extends HttpServlet {
     private ProductDao productDao;
 //    public List<Product> dataList = new ArrayList<>();
@@ -76,6 +76,11 @@ public class ProductServlet extends HttpServlet {
              request.getRequestDispatcher("/views/index.jsp").forward(request, response);
         } else if(uri.contains("add")) {
              request.getRequestDispatcher("/views/add.jsp").forward(request, response);
+        } else if (uri.contains("edit")) {
+            int productID = Integer.parseInt(request.getParameter("id"));
+             Product product =  productDao.getProductById(productID);
+             request.setAttribute("product", product);
+             request.getRequestDispatcher("/views/edit.jsp").forward(request, response);
         }
          
 //        System.out.println("abc" + products);

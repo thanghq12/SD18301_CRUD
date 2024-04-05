@@ -19,12 +19,14 @@
                 <td>ID</td>
                 <td>Name</td>
                 <td>Price</td>
+                 <td>Action</td>
             </tr>
             <% for (Product product : (List<Product>) request.getAttribute("products")) {  %>
              <tr>
                 <td><%= product.getId() %></td>
                 <td><%= product.getName() %></td>
                 <td><%= product.getPrice() %></td>
+                <td><a href="/gradleproject6/product/edit?id=<%= product.getId() %>">Sửa</a></td>
             <% } %>    
             </tr>
         </table>
