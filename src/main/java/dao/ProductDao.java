@@ -90,4 +90,30 @@ public class ProductDao {
               }
           }
     }
+       //xóa sản phẩm
+       public void deleteProductById(int productId)   {
+          Session session = null ;
+          Transaction transaction = null;
+         
+          try {
+              session = sessionFactoty.openSession();
+              transaction = session.beginTransaction();
+              Product product = session.get(Product.class,productId );
+              if(product != null) {
+                  session.delete(product);
+              }
+              transaction.commit();
+          } catch(Exception e) {
+              if (transaction != null) {
+                transaction.rollback();
+              }
+              e.printStackTrace(); // biết lỗi khi mà thêm không thành công 
+          } finally {
+              if (session != null) {
+                  session.close();
+              }
+          }
+      
+          
+    }
 }

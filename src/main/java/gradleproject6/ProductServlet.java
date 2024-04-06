@@ -22,7 +22,7 @@ import util.HibernateUtil;
  *
  * @author hoangquangthang
  */
-@WebServlet(name="ProductServlet",urlPatterns = {"/product/list","/product/add","/product/edit"})
+@WebServlet(name="ProductServlet",urlPatterns = {"/product/list","/product/add","/product/edit","/product/delete"})
 public class ProductServlet extends HttpServlet {
     private ProductDao productDao;
 //    public List<Product> dataList = new ArrayList<>();
@@ -81,6 +81,12 @@ public class ProductServlet extends HttpServlet {
              Product product =  productDao.getProductById(productID);
              request.setAttribute("product", product);
              request.getRequestDispatcher("/views/edit.jsp").forward(request, response);
+        } else if (uri.contains("delete")) {
+            int productID = Integer.parseInt(request.getParameter("id"));
+             productDao.deleteProductById(productID);
+             //xóa thành công thì sẽ nhảy về trang list
+            response.sendRedirect("/gradleproject6/product/list");
+            
         }
          
 //        System.out.println("abc" + products);

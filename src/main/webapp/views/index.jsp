@@ -26,9 +26,19 @@
                 <td><%= product.getId() %></td>
                 <td><%= product.getName() %></td>
                 <td><%= product.getPrice() %></td>
-                <td><a href="/gradleproject6/product/edit?id=<%= product.getId() %>">Sửa</a></td>
+                <td><a href="/gradleproject6/product/edit?id=<%= product.getId() %>">Sửa</a>
+                    <button onclick="confirmDelete(<%= product.getId() %>)">Xóa</button>
+                </td>
             <% } %>    
             </tr>
         </table>
     </body>
 </html>
+<script>
+    function confirmDelete(productId) {
+        if(confirm("Bạn có muốn xóa sản phẩm này không ?" )) {
+            
+            window.location.href = "/gradleproject6/product/delete?id="+productId;
+        }
+    }
+</script>
